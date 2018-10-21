@@ -1,5 +1,5 @@
 ///<reference path="../BaseDao.ts"/>
-import mysql from "mysql";
+import * as mysql from "mysql";
 export class BaseDaoImpl implements BaseDao {
     getConnection(host, user, password, database) {
         try {
@@ -9,13 +9,7 @@ export class BaseDaoImpl implements BaseDao {
                 password: password,
                 database: database
             });
-            connection.connect(err => {
-                if (err) {
-                    return null;
-                } else {
-                    return connection;
-                }
-            });
+            return connection;
         } catch (error) {
             throw error;
         }    

@@ -1,11 +1,7 @@
-// @ts-ignore
-import {index} from './routes';
-import * as bodyParser from "body-parser";
+import { index } from './routes'
 
-let app = new index();
-const port = 3000;
-app.express.use(bodyParser.urlencoded({ extended: false }));
-app.express.use(bodyParser.json());
+let app    = new index()
+const port = 3000
 
 app.express.listen(port, (err) => {
   if (err) {

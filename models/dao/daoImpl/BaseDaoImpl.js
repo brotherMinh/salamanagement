@@ -1,26 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 ///<reference path="../BaseDao.ts"/>
-var mysql_1 = require("mysql");
+var mysql = require("mysql");
 var BaseDaoImpl = /** @class */ (function () {
     function BaseDaoImpl() {
     }
     BaseDaoImpl.prototype.getConnection = function (host, user, password, database) {
         try {
-            var connection_1 = mysql_1.default.createConnection({
+            var connection = mysql.createConnection({
                 host: host,
                 user: user,
                 password: password,
                 database: database
             });
-            connection_1.connect(function (err) {
-                if (err) {
-                    return null;
-                }
-                else {
-                    return connection_1;
-                }
-            });
+            return connection;
         }
         catch (error) {
             throw error;

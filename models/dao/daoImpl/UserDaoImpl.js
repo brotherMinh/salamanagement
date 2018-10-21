@@ -23,21 +23,18 @@ var UserDaoImpl = /** @class */ (function (_super) {
     }
     UserDaoImpl.prototype.getUserByUserName = function (userName, password) {
         var con = this.getConnection("localhost", "root", "root", "sale_management");
-        console.log(con);
-        // con.query(QUERY_CHECK_AUTH_LOGIN, [userName, password], (err, result) => {
-        //     if (err) {
-        //         // xu ly loi o day
-        //         console.log(err);
-        //     } else {
-        //         if (result.length == 0) {
-        //             return false;
-        //         } else {
-        //             return true;
-        //         }
-        //     }
-        //     return result;
-        // });
-        return null;
+        con.connect(function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+        con.query(QUERY_CHECK_AUTH_LOGIN, [userName, password], function (err, result) {
+            if (err) {
+                console.log(err);
+            }
+            return result;
+        });
+        con.end();
     };
     return UserDaoImpl;
 }(BaseDaoImpl_1.BaseDaoImpl));
