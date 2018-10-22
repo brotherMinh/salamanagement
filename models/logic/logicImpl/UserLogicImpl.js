@@ -9,7 +9,7 @@ var UserLogicImpl = /** @class */ (function () {
     UserLogicImpl.prototype.checkExistedUser = function (userName, password) {
         var userDao = new UserDaoImpl_1.UserDaoImpl();
         var user = userDao.getUserByUserName(userName, password);
-        if (user === null) {
+        if (user === null || user === undefined) {
             return false;
         }
         return true;

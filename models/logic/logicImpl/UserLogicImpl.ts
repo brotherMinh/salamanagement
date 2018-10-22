@@ -6,7 +6,7 @@ export class UserLogicImpl implements UserLogic{
   checkExistedUser(userName: String, password: String): boolean {
     let userDao = new UserDaoImpl();
     let user = userDao.getUserByUserName(userName, password);
-    if (user === null){
+    if (user === null || user === undefined){
       return false;
     }
     return true;
