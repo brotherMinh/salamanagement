@@ -3,13 +3,14 @@ import { BaseDaoImpl } from "./BaseDaoImpl";
 var jssha = require('js-sha512');
 
 const QUERY_GET_SALT = `SELECT SALT FROM USER U WHERE U.USERNAME = ?;`;
-const QUERY_CHECK_AUTH_LOGIN = `SELECT * FROM USER U WHERE U.USERNAME = ? AND U.PASSWORD = ?;`;
+const QUERY_GET_USER_BY_USERNAME = `SELECT * FROM USER U WHERE U.USERNAME = ? AND U.PASSWORD = ?;`;
+const QUERY_GET_USER_BY_GOOGLEID = `SELECT * FROM USER U WHERE U.ID_GOOGLE = ?;`;
 
 export class UserDaoImpl extends BaseDaoImpl implements UserDao {
   getUserByUserName(userName: String, password: String) {
     var salt = '';
 
-    const con = this.getConnection("localhost", "root", "root", "sale_management");
+    const con = this.getConnection();
     con.connect(err => {
       if (err) {
         console.log(err);
@@ -24,11 +25,27 @@ export class UserDaoImpl extends BaseDaoImpl implements UserDao {
     });
 
     //check user
-    con.query(QUERY_CHECK_AUTH_LOGIN, [userName, jssha.sha512.array(password+salt)], (err, result) => {
+    con.query(QUERY_GET_USER_BY_USERNAME, [userName, jssha.sha512.array(password+salt)], (err, result) => {
         if (err) {
             console.log(err);
         }
         return result;
+    });
+    con.end()
+  }
+
+  getUserByGoogleId(googleId: String){
+    const con = this.getConnection();
+    con.connect(err => {
+      if (err) {
+        console.log(err);
+      }
+    });
+    con.query(QUERY_GET_USER_BY_GOOGLEID, [googleId], (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      return result;
     });
     con.end()
   }

@@ -11,4 +11,11 @@ export class UserLogicImpl implements UserLogic{
     }
     return true;
   }
+  checkExistedGoogle(googleId: String): boolean{
+
+    return true;
+  }
+  getUserByGoogle(googleId: String){
+    return null;
+  }
 }

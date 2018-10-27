@@ -1,6 +1,7 @@
 import { UserLogicImpl } from '../models/logic/logicImpl/UserLogicImpl'
 import * as express      from 'express'
 import * as bodyParser   from 'body-parser'
+const passport = require('passport');
 
 export class index {
   public express
@@ -9,6 +10,9 @@ export class index {
     this.express = express()
     this.express.use(bodyParser.urlencoded({ extended: false }))
     this.express.use(bodyParser.json())
+    // this.express.use(passport.initialize())
+    // this.express.use(passport.session())
+    // require('./config/passport')(passport);
     this.mountRoutes()
   }
 
@@ -29,6 +33,13 @@ export class index {
         res.send('dang nhap that bai')
       }
     })
+    router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'], }),)
+    router.get('/auth/google/callback', passport.authenticate('google'),  (req, res) => {
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.redirect('/survey');
+      },
+    )
     this.express.use('/', router)
   }
 }

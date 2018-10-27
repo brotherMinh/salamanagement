@@ -1,4 +1,4 @@
-class User {
+export class User {
     private _id_user: String;
     public get id_user(): String {
         return this._id_user;

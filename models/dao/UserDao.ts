@@ -1,4 +1,6 @@
 ///<reference path="../entities/User.ts"/>
 interface UserDao {
-    getUserByUserName(userName: String, password: String);
+  getUserByUserName(userName: String, password: String);
+
+  getUserByGoogleId(googleId: String);
 }

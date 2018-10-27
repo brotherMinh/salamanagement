@@ -1,13 +1,13 @@
 ///<reference path="../BaseDao.ts"/>
 import * as mysql from "mysql";
 export class BaseDaoImpl implements BaseDao {
-    getConnection(host, user, password, database) {
+    getConnection() {
         try {
             const connection = mysql.createConnection({
-                host: host,
-                user: user,
-                password: password,
-                database: database
+                host: "localhost",
+                user: "root",
+                password: "root",
+                database: "sale_management"
             });
             return connection;
         } catch (error) {

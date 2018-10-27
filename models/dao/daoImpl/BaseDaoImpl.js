@@ -1,25 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 ///<reference path="../BaseDao.ts"/>
-var mysql = require("mysql");
-var BaseDaoImpl = /** @class */ (function () {
-    function BaseDaoImpl() {
-    }
-    BaseDaoImpl.prototype.getConnection = function (host, user, password, database) {
+const mysql = require("mysql");
+class BaseDaoImpl {
+    getConnection() {
         try {
-            var connection = mysql.createConnection({
-                host: host,
-                user: user,
-                password: password,
-                database: database
+            const connection = mysql.createConnection({
+                host: "localhost",
+                user: "root",
+                password: "root",
+                database: "sale_management"
             });
             return connection;
         }
         catch (error) {
             throw error;
         }
-    };
-    BaseDaoImpl.prototype.closeConnection = function (connection) {
+    }
+    closeConnection(connection) {
         try {
             if (connection != null) {
                 connection.end();
@@ -28,7 +26,7 @@ var BaseDaoImpl = /** @class */ (function () {
         catch (error) {
             throw error;
         }
-    };
-    return BaseDaoImpl;
-}());
+    }
+}
 exports.BaseDaoImpl = BaseDaoImpl;
+//# sourceMappingURL=BaseDaoImpl.js.map
